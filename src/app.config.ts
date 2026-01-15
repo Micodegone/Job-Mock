@@ -5,7 +5,7 @@ export default defineAppConfig({
     "pages/guide/index",
     "pages/profile/index",
     "pages/postDetail/PostDetail",
-    "pages/createPost/CreatePostSheet",
+    "pages/createPost/index",
   ],
   window: {
     backgroundTextStyle: "light",

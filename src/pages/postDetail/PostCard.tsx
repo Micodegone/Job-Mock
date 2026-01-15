@@ -1,4 +1,4 @@
-import { ThumbsUp, MessageCircle, Users } from "lucide-react";
+import { ThumbsUp, MessageCircle } from "lucide-react";
 import type { Post } from "@/types";
 
 interface PostCardProps {

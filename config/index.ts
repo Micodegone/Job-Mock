@@ -62,11 +62,6 @@ export default defineConfig<"webpack5">(async (merge, { command, mode }) => {
       },
     },
     h5: {
-      devServer: {
-        port: 3000,
-        host: "0.0.0.0",
-        hot: true,
-      },
       publicPath: "/",
       staticDirectory: "static",
       output: {

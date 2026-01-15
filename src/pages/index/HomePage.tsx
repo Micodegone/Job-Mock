@@ -77,7 +77,7 @@ export function HomePage({ onPostClick, onCreatePost }: HomePageProps) {
       <button
         aria-label="创建新帖子"
         onClick={onCreatePost}
-        className="fixed bottom-24 right-6 w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 active:scale-95 text-white rounded-full shadow-2xl flex items-center justify-center transition-all z-40 hover:shadow-blue-500/50"
+        className="fixed bottom-24 border-0 right-6 w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 active:scale-95 text-white rounded-full shadow-2xl flex items-center justify-center transition-all z-40 hover:shadow-blue-500/50"
       >
         <PenSquare className="w-6 h-6" />
       </button>

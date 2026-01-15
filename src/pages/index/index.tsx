@@ -14,7 +14,7 @@ export default function Index() {
   const handleCreatePost = () => {
     // Handle create post
     Taro.navigateTo({
-      url: `/pages/postDetail/PostDetail`,
+      url: `/pages/createPost/CreatePostSheet`,
     });
   };
 

@@ -9,7 +9,14 @@ export default function PostDetail() {
   const [liked, setLiked] = useState(false);
 
   const onBack = () => {
-    Taro.navigateBack();
+    // Taro.redirectTo({ url: "/pages/index/index" });
+    // 判断当前路由栈是否有上一级
+    const pages = Taro.getCurrentPages();
+    if (pages.length > 1) {
+      Taro.navigateBack();
+    } else {
+      Taro.redirectTo({ url: "/pages/index/index" });
+    }
   };
   const mockComments = [
     {
@@ -81,15 +88,15 @@ export default function PostDetail() {
     <div className="flex flex-col h-full bg-gray-50">
       {/* 顶部导航 */}
       <div className="bg-white border-b border-gray-100 sticky top-0 z-10 shadow-sm">
-        <div className="flex items-center gap-3 px-4 h-14">
+        <div className="flex items-center gap-3 px-4 h-12">
           <button
-            aria-label="返回上一页"
             onClick={onBack}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 active:bg-gray-200 transition-colors"
+            aria-label="返回上一页"
+            className="w-7 h-7 flex items-center justify-center border-none rounded-full hover:bg-gray-100 active:bg-gray-200 "
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
           </button>
-          <h2>详情</h2>
+          <div className="text-sm font-medium">详情</div>
         </div>
       </div>
 
@@ -114,10 +121,12 @@ export default function PostDetail() {
           </div>
 
           {/* 标题 */}
-          <h2 className="mb-4">{post.title}</h2>
+          <h4 className="mb-4">{post.title}</h4>
 
           {/* 内容 */}
-          <p className="text-gray-700 mb-5 leading-relaxed">{post.content}</p>
+          <p className="text-gray-700 text-sm mb-5 leading-relaxed">
+            {post.content}
+          </p>
 
           {/* 标签 */}
           <div className="flex flex-wrap gap-2 mb-5">
@@ -132,41 +141,41 @@ export default function PostDetail() {
           </div>
 
           {/* 作者信息 */}
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-5 pb-5 border-b border-gray-100">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-3 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <span className="text-gray-700">{post.author}</span>
               <span className="text-gray-300">·</span>
               <span>{post.timestamp}</span>
             </div>
-            {post.type === "question" && (
-              <span className="text-xs text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
-                已有 {post.comments} 位求职人看过
-              </span>
-            )}
           </div>
+          {post.type === "question" && (
+            <span className="text-xs text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">
+              已有 {post.comments} 位求职人看过
+            </span>
+          )}
 
           {/* 互动按钮 */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap mt-4 items-center gap-3">
             <button
               onClick={() => setLiked(!liked)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-full border-2 transition-all ${
+              className={`flex items-center gap-2 px-4 py-3 rounded-full border-none transition-all ${
                 liked
-                  ? "border-red-500 bg-gradient-to-r from-red-50 to-pink-50 text-red-600 scale-105"
-                  : "border-gray-200 hover:border-red-300 hover:bg-red-50/50"
+                  ? " ring-2 ring-red-500 bg-gradient-to-r from-red-50 to-pink-50 text-red-600"
+                  : "ring-gray-200"
               }`}
             >
               <ThumbsUp className="w-4 h-4" />
-              <span className="text-sm">
+              <span className="font-medium">
                 我懂你 {post.likes + (liked ? 1 : 0)}
               </span>
             </button>
-            <button className="flex items-center gap-2 px-5 py-3 rounded-full border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all">
+            <button className="flex items-center gap-2 px-4 py-3 rounded-full border-none ring-gray-200 hover:ring-blue-300 hover:ring-2 hover:bg-blue-50/50 transition-all">
               <MessageCircle className="w-4 h-4" />
-              <span className="text-sm">一起说</span>
+              <span className="font-medium">一起说</span>
             </button>
             <button
               aria-label="分享此帖子"
-              className="flex items-center justify-center w-11 h-11 rounded-full border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50/50 transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded-full border-none ring-gray-200 hover:ring-purple-300 hover:ring-2 hover:bg-purple-50/50 transition-all"
             >
               <Share2 className="w-4 h-4" />
             </button>
@@ -181,7 +190,7 @@ export default function PostDetail() {
               <button
                 key={reply}
                 onClick={() => handleQuickReply(reply)}
-                className="px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 active:scale-95 rounded-full text-sm text-gray-700 border border-blue-100 transition-all"
+                className="px-4 py-2 bg-gradient-to-r border-none from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 active:scale-95 rounded-full text-sm text-gray-700 border border-blue-100 transition-all"
               >
                 {reply}
               </button>
@@ -192,12 +201,12 @@ export default function PostDetail() {
         {/* 评论列表 */}
         <div className="bg-white">
           <div className="px-5 py-4 border-b border-gray-100">
-            <h3 className="flex items-center gap-2">
+            <h4 className="flex items-center gap-2">
               评论
               <span className="text-sm text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
                 {mockComments.length}
               </span>
-            </h3>
+            </h4>
           </div>
 
           {mockComments.length === 0 ? (
@@ -228,7 +237,7 @@ export default function PostDetail() {
                     <p className="text-sm text-gray-700 mb-3 leading-relaxed">
                       {comment.content}
                     </p>
-                    <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-red-600 hover:bg-red-50 px-2.5 py-1.5 rounded-lg transition-all">
+                    <button className="flex items-center gap-1.5 text-xs border-none text-gray-500 hover:text-red-600 hover:bg-red-50 hover:ring-2 hover:ring-red-600 px-2.5 py-1.5 rounded-lg transition-all">
                       <ThumbsUp className="w-3.5 h-3.5" />
                       <span className="tabular-nums">{comment.likes}</span>
                     </button>
@@ -240,8 +249,8 @@ export default function PostDetail() {
         </div>
 
         {/* 举报入口 */}
-        <div className="bg-white mt-4 p-5">
-          <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all">
+        <div className="bg-white mt-4 p-4">
+          <button className="flex items-center gap-2 text-sm border-0 border-gray-200 text-gray-500 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-all">
             <Flag className="w-4 h-4" />
             <div className="text-left">
               <div>内容不合适？点这里反馈</div>
@@ -252,18 +261,18 @@ export default function PostDetail() {
       </div>
 
       {/* 底部评论输入 */}
-      <div className="bg-white border-t border-gray-200 p-4 sticky bottom-0 shadow-2xl">
+      <div className="bg-white border-t border-gray-200 p-3 sticky bottom-0 shadow-2xl">
         <div className="flex items-center gap-3">
           <input
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder={post.type === "question" ? "我来回答" : "说点什么..."}
-            className="flex-1 px-4 py-3 bg-gray-100 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="flex-1 px-4 py-1.5 bg-gray-100 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
           <button
             disabled={!comment}
-            className={`px-6 py-3 rounded-full transition-all ${
+            className={`px-6 py-2 rounded-full transition-all border-0 ${
               comment
                 ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 active:scale-95 text-white shadow-lg"
                 : "bg-gray-200 text-gray-400"

@@ -1,10 +1,16 @@
-import type { UserConfigExport } from "@tarojs/cli"
+import type { UserConfigExport } from "@tarojs/cli";
 
 export default {
-   logger: {
+  logger: {
     quiet: false,
-    stats: true
+    stats: true,
   },
   mini: {},
-  h5: {}
-} satisfies UserConfigExport<'webpack5'>
+  h5: {
+    devServer: {
+      port: 8080,
+      host: "0.0.0.0",
+      hot: true,
+    },
+  },
+} satisfies UserConfigExport<"webpack5">;

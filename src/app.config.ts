@@ -7,6 +7,7 @@ export default defineAppConfig({
     "pages/profile/index",
     "pages/postDetail/PostDetail",
     "pages/createPost/index",
+    "pages/createGuide/index",
   ],
   window: {
     backgroundTextStyle: "light",

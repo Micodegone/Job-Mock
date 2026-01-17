@@ -22,7 +22,7 @@ export function TopBarNav({ onBack, context, children }: TopBarNavProps) {
           <div className="text-sm font-medium">{context}</div>
         </div>
       </div>
-      <main>{children}</main>
+      <main className="pt-12">{children}</main>
     </View>
   );
 }

@@ -91,11 +91,25 @@ export default defineConfig<"webpack5">(async (merge, { command, mode }) => {
       },
     },
     rn: {
-      appName: "taroDemo",
+      appName: "JobMock",
       postcss: {
         cssModules: {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         },
+      },
+      output: {
+        iosSourceMapUrl: "", // sourcemap 文件url
+        iosSourcemapOutput: "../taro-native-shell/ios/main.map", // sourcemap 文件输出路径
+        iosSourcemapSourcesRoot: "", // 将 sourcemap 资源路径转为相对路径时的根目录
+        androidSourceMapUrl: "",
+        androidSourcemapOutput:
+          "../taro-native-shell/android/app/src/main/assets/index.android.map",
+        androidSourcemapSourcesRoot: "",
+        ios: "../taro-native-shell/ios/main.jsbundle",
+        iosAssetsDest: "../taro-native-shell/ios",
+        android:
+          "../taro-native-shell/android/app/src/main/assets/index.android.bundle",
+        androidAssetsDest: "../taro-native-shell/android/app/src/main/res",
       },
     },
   };

@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components";
-import Taro, { useDidShow, useReady } from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 
